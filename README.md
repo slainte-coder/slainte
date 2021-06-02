@@ -25,18 +25,18 @@ Siehe ---
 
 ## Wie kann ich am Projekt teilnehmen.
 
-*#[1]: https://github.com/slainte-coder/slainte/blob/main/Code-of-Conduct.md "Verhaltenskodex"
-*#[2]: https://github.com/slainte-coder/slainte/blob/main/Teilnahme.md "Teilnahme"
+* #[1]: https://github.com/slainte-coder/slainte/blob/main/Code-of-Conduct.md "Verhaltenskodex"
+* #[2]: https://github.com/slainte-coder/slainte/blob/main/Teilnahme.md "Teilnahme"
 
 
 ## Hauptautoren und Betreiber des Projektes sind
 
-*Peter Brunner
-*Jakob Strutz
-*Georg Mayr
-*Michael Lackner
-*Dieter Wulz
-*Alfred Sabitzer https://github.com/Alfred-Sabitzer/Alfred-Sabitzer
+* Peter Brunner
+* Jakob Strutz
+* Georg Mayr
+* Michael Lackner
+* Dieter Wulz
+* Alfred Sabitzer https://github.com/Alfred-Sabitzer/Alfred-Sabitzer
 
 ## Lizenz ist GPG
 
