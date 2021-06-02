@@ -1,0 +1,5 @@
+hallo - Begrüßung durch den Bot
+status - Gibt ein paar Informationen über den Bot aus
+info - Zeigt ein paar Informationen über Dich an
+ueberraschung - Laß dich überraschen
+hilfe - Anzeige des Hilfetextes

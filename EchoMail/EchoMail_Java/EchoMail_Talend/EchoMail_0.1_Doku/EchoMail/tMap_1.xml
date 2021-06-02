@@ -1,0 +1,49 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<externalNode i18n.job.component.parameters="Component Parameters:" i18n.job.properties="Eigenschaften" i18n.job.values="Values" i18n.mapper.table.for="Mapper table for " i18n.mapper.table.properties="Mapper table Properties" i18n.job.name="Name" i18n.tmap.matching.mode="Matching-mode" i18n.mapper.table.isminimized="isMinimized" i18n.tmap.isreject="isReject" i18n.tmap.isrejectinnnerjoin="isRejectInnerJoin" i18n.tmap.isinnerjoin="isInnerJoin" i18n.tmap.expressionfilter="expressionFilter" i18n.mapper.table.metadata.entries="Metadata Table Entries" i18n.job.type="Typ" i18n.mapper.table.expression="Ausdruck" i18n.tmap.isnullable="isNullable" i18n.tmap.constraint.entries="Constraint Table Entries" name="tMap_1" preview="pictures/_cnvQ4EmAEeqLAqbLGi8msQ-tMap_1-PREVIEW.bmp">
+  <parameters>
+    <column name="tStatCatcher Statistik">false</column>
+    <column name="Mapping Verbindungen anzeigen als:">AUTO</column>
+    <column name="Verzeichnis f&#252;r tempor&#228;re Daten:"></column>
+    <column name="Maximale Puffergr&#246;&#223;e (Anzahl Zeilen)">2000000</column>
+    <column name="Ignore trailing zeros for BigDecimal">false</column>
+    <column name="Informationen anzeigen">false</column>
+    <column name="Kommentar"><![CDATA[]]></column>
+    <column name="Use an existing validation rule">false</column>
+  </parameters>
+  <mapperTable type="input">
+    <table name="row2" matching-mode="UNIQUE_MATCH" lookup-mode="LOAD_ONCE" isMinimized="false" isReject="false" isRejectInnerJoin="false" isInnerJoin="false" isPersistent="false" expressionFilter="null" activateExpressionFilter="false" activateCondensedTool="false" activateColumnNameFilter="false" columnNameFilter="null">
+      <metadataTableEntries>
+        <entry name="MailFrom" type="String" expression="" isNullable="true"/>
+        <entry name="MailDate" type="String" expression="" isNullable="true"/>
+        <entry name="MailSubject" type="String" expression="" isNullable="true"/>
+      </metadataTableEntries>
+    </table>
+    <table name="row4" matching-mode="UNIQUE_MATCH" lookup-mode="RELOAD" isMinimized="false" isReject="false" isRejectInnerJoin="false" isInnerJoin="false" isPersistent="false" expressionFilter="null" activateExpressionFilter="false" activateCondensedTool="false" activateColumnNameFilter="false" columnNameFilter="null">
+      <metadataTableEntries>
+        <entry name="MailFrom" type="String" expression="row2.MailFrom " isNullable="false"/>
+        <entry name="MailDate" type="String" expression="" isNullable="true"/>
+        <entry name="MailNo" type="Integer" expression="" isNullable="true"/>
+        <entry name="MailDateLastTime" type="String" expression="" isNullable="true"/>
+        <entry name="MailDateCompare" type="String" expression="" isNullable="true"/>
+        <entry name="Mailtobeskipped" type="Boolean" expression="" isNullable="true"/>
+      </metadataTableEntries>
+    </table>
+  </mapperTable>
+  <mapperTable type="output">
+    <table name="outSQL" isMinimized="false" isReject="false" isRejectInnerJoin="false" isInnerJoin="false" isPersistent="false" expressionFilter="null" activateExpressionFilter="false" activateCondensedTool="false" activateColumnNameFilter="false" columnNameFilter="null">
+      <metadataTableEntries>
+        <entry name="MailFrom" type="String" expression="row2.MailFrom " isNullable="false"/>
+        <entry name="MailDate" type="String" expression="//Sat, 1 Feb 2020 17:11:10 +0100 
+TalendDate.formatDateLocale(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.parseDateLocale(&quot;E, d MMM yyyy HH:mm:ss Z&quot;,row2.MailDate,&quot;EN&quot;),&quot;EN&quot;) " isNullable="true"/>
+        <entry name="MailNo" type="Integer" expression="Relational.ISNULL(row4.MailNo) ? 1 : row4.MailNo+1 " isNullable="true"/>
+        <entry name="MailDateLastTime" type="String" expression="row4.MailDateLastTime " isNullable="true"/>
+        <entry name="MailDateCompare" type="String" expression=" row4.MailDateCompare " isNullable="true"/>
+        <entry name="Mailtobeskipped" type="Boolean" expression="row4.Mailtobeskipped " isNullable="true"/>
+      </metadataTableEntries>
+    </table>
+  </mapperTable>
+  <mapperTable type="var">
+    <table name="Var" isMinimized="true" isReject="false" isRejectInnerJoin="false" isInnerJoin="false" isPersistent="false" expressionFilter="null" activateExpressionFilter="false" activateCondensedTool="false" activateColumnNameFilter="false" columnNameFilter="null"/>
+  </mapperTable>
+</externalNode>

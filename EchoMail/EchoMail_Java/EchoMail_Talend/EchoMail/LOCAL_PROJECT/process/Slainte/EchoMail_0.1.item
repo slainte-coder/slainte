@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Slainte_Server" jobType="Standard">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="Name of IMAP User" name="ImapUser" prompt="ImapUser?" promptNeeded="false" type="id_String" value="test@slainte.at"/>
+    <contextParameter comment="Password of IMAP User" name="ImapPassword" prompt="ImapPassword?" promptNeeded="false" type="id_Password" value="enc:system.encryption.key.v1:06wmvVmK1bgEIcsHbtVLo34gTOzTzdw/W4wJ+nhnJ/VJ0QQDOxQ="/>
+    <contextParameter comment="Host for Imap" name="ImapHost" prompt="ImapHost?" promptNeeded="false" type="id_String" value="slainte.at"/>
+    <contextParameter comment="Port for Imap" name="ImapPort" prompt="ImapPort?" promptNeeded="false" type="id_Integer" value="993"/>
+    <contextParameter comment="Name of SMTP User" name="SmtpUser" prompt="SmtpUser?" promptNeeded="false" type="id_String" value="test@slainte.at"/>
+    <contextParameter comment="Password of SMTP User" name="SmtpPassword" prompt="SmtpPassword?" promptNeeded="false" type="id_Password" value="enc:system.encryption.key.v1:RpUG+G9k9tr/b/3d3kPFpVB72jqSG3BUvY9AZkxJFw9r87Cg+og="/>
+    <contextParameter comment="Host for SMTP" name="SMTPHost" prompt="SMTPHost?" promptNeeded="false" type="id_String" value="slainte.at"/>
+    <contextParameter comment="Port for SMTP" name="SMTPPort" prompt="SMTPPort?" promptNeeded="false" type="id_String" value="587"/>
+    <contextParameter comment="One Email within this time" name="Purge_time_Minutes" prompt="Purge_time_Minutes?" promptNeeded="false" type="id_Integer" value="3"/>
+    <contextParameter comment="Location of sqlite-Database eg. /home/alfred/echo.sqlite" name="SQLLite" prompt="SQLLite?" promptNeeded="false" type="id_String" value="/home/alfred/echo.sqlite"/>
+    <contextParameter comment="Name of Table eg. EchoMail" name="SQLLite_Table" prompt="SQLLite_Table?" promptNeeded="false" type="id_String" value="EchoMail"/>
+    <contextParameter comment="Where is my temporary Working Directory" name="TempDir" prompt="TempDir?" promptNeeded="false" type="id_String" value="/tmp/EchoMail"/>
+  </context>
+  <context confirmationNeeded="false" name="Slainte_Server">
+    <contextParameter comment="Name of IMAP User" name="ImapUser" prompt="ImapUser?" promptNeeded="false" type="id_String" value="echo@slainte.at"/>
+    <contextParameter comment="Password of IMAP User" name="ImapPassword" prompt="ImapPassword?" promptNeeded="false" type="id_Password" value="enc:system.encryption.key.v1:5mwKG/VaxWNHU5UoimhN/udk7MBMKEV2mqOQR8Ks4tHYW8Lk6uo="/>
+    <contextParameter comment="Host for Imap" name="ImapHost" prompt="ImapHost?" promptNeeded="false" type="id_String" value="slainte.at"/>
+    <contextParameter comment="Port for Imap" name="ImapPort" prompt="ImapPort?" promptNeeded="false" type="id_Integer" value="993"/>
+    <contextParameter comment="Name of SMTP User" name="SmtpUser" prompt="SmtpUser?" promptNeeded="false" type="id_String" value="echo@slainte.at"/>
+    <contextParameter comment="Password of SMTP User" name="SmtpPassword" prompt="SmtpPassword?" promptNeeded="false" type="id_Password" value="enc:system.encryption.key.v1:DfNHsNg2Uvbug4RtQ7adD0NOgSLMUiuHRrwS3+HQ/1Fm8gheBVE="/>
+    <contextParameter comment="Host for SMTP" name="SMTPHost" prompt="SMTPHost?" promptNeeded="false" type="id_String" value="slainte.at"/>
+    <contextParameter comment="Port for SMTP" name="SMTPPort" prompt="SMTPPort?" promptNeeded="false" type="id_String" value="587"/>
+    <contextParameter comment="One Email within this time" name="Purge_time_Minutes" prompt="Purge_time_Minutes?" promptNeeded="false" type="id_Integer" value="3"/>
+    <contextParameter comment="Location of sqlite-Database eg. /home/alfred/echo.sqlite" name="SQLLite" prompt="SQLLite?" promptNeeded="false" type="id_String" value="/home/slainte/echo.sqlite"/>
+    <contextParameter comment="Name of Table eg. EchoMail" name="SQLLite_Table" prompt="SQLLite_Table?" promptNeeded="false" type="id_String" value="EchoMail"/>
+    <contextParameter comment="Where is my temporary Working Directory" name="TempDir" prompt="TempDir?" promptNeeded="false" type="id_String" value="/tmp/EchoMail"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="288" show="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0" show="false"/>
+    <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_PROPERTY_TYPENAME" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_HADOOP_VERSION" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_ENABLE_KERBEROS" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_NAME_NODE_PRINCIPAL" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_USERNAME" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_GROUP" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_USE_KEYTAB" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_KT_PRINCIPAL" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_KEY_TAB" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_ENABLE_OO_KERBEROS" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_NAME_NODE_END_POINT" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_JOB_TRACKER_ENDPOINT" value="" show="false"/>
+    <elementParameter field="TEXT" name="OOZIE_END_POINT" value="" show="false"/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="MULTI_THREAD_EXECATION" value="false"/>
+    <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="false"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="false" show="false"/>
+    <elementParameter field="RADIO" name="FROM_DATABASE_FLAG_IMPLICIT_CONTEXT" value="false" show="false"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;" show="false"/>
+    <elementParameter field="CHECK" name="OVERRIDE_ENCODING_FLAG" value="false" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="OVERRIDE_ENCODING_IN_EXTRA" value="ISO-8859-15" show="false"/>
+    <elementParameter field="TECHNICAL" name="OVERRIDE_ENCODING_IN_EXTRA:ENCODING_TYPE" value="ISO-8859-15" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_TYPE_IMPLICIT_CONTEXT" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value="" show="false"/>
+    <elementParameter field="TEXT" name="URL_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TABLE" name="DRIVER_JAR_IMPLICIT_CONTEXT" show="false"/>
+    <elementParameter field="TEXT" name="DRIVER_CLASS_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="HOST_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PORT_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="USER_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" value="enc:system.encryption.key.v1:513TClqGUXbk8bBgt/vX0LLW+0ZJoOvRJ0pTbfeE" show="false"/>
+    <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value="Warning" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value="Warning" show="false"/>
+    <elementParameter field="CHECK" name="PRINT_OPERATIONS" value="false" show="false"/>
+    <elementParameter field="CHECK" name="DISABLE_ERROR" value="false" show="false"/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false" show="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false" show="false"/>
+    <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_METERCATCHER_FLAG" value="false"/>
+    <elementParameter field="CHECK" name="ON_CONSOLE_FLAG" value="false" show="false"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" value="false" show="false"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="&quot;/home/alfred/TOS_DI-20200117_1600-V7.3.1M6/workspace/.metadata&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FILENAME_STATS" value="&quot;stats_file.txt&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FILENAME_LOGS" value="&quot;logs_file.txt&quot;" show="false"/>
+    <elementParameter field="TEXT" name="FILENAME_METTER" value="&quot;meter_file.txt&quot;" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="ISO-8859-15" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15" show="false"/>
+    <elementParameter field="CHECK" name="ON_DATABASE_FLAG" value="false" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_TYPE" value="tJDBCOutput" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_12" show="false"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TABLE" name="DRIVER_JAR" show="false"/>
+    <elementParameter field="TEXT" name="DRIVER_CLASS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DATASOURCE" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:W7iL8mYK/4jp6XSU6N+Ww+gllUVKBqpQkKujrIPg" show="false"/>
+    <elementParameter field="FILE" name="DBFILE" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE_STATS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE_LOGS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE_METER" value="&quot;&quot;" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_RUNTIME_ERRORS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_USER_ERRORS" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_USER_WARNING" value="true" show="false"/>
+    <elementParameter field="CHECK" name="CATCH_REALTIME_STATS" value="false" show="false"/>
+    <elementParameter field="TEXT" name="HEADERFOOTER_HEADERID" value="" show="false"/>
+    <elementParameter field="CHECK" name="HEADER_ENABLED" value="false" show="false"/>
+    <elementParameter field="TEXT" name="HEADER_LIBRARY" value="" show="false"/>
+    <elementParameter field="TEXT" name="HEADER_CODE" value="" show="false"/>
+    <elementParameter field="TEXT" name="HEADER_IMPORT" value="" show="false"/>
+    <elementParameter field="TEXT" name="HEADERFOOTER_FOOTERID" value="" show="false"/>
+    <elementParameter field="CHECK" name="FOOTER_ENABLED" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FOOTER_LIBRARY" value="" show="false"/>
+    <elementParameter field="TEXT" name="FOOTER_CODE" value="" show="false"/>
+    <elementParameter field="TEXT" name="FOOTER_IMPORT" value="" show="false"/>
+    <routinesParameter id="_DPazUE9KEeqhe5Q9EaMNPQ" name="Relational"/>
+    <routinesParameter id="_DRBV0E9KEeqhe5Q9EaMNPQ" name="TalendStringUtil"/>
+    <routinesParameter id="_DQw3IE9KEeqhe5Q9EaMNPQ" name="DataOperation"/>
+    <routinesParameter id="_DQ7PME9KEeqhe5Q9EaMNPQ" name="Numeric"/>
+    <routinesParameter id="_DQiNoE9KEeqhe5Q9EaMNPQ" name="TalendString"/>
+    <routinesParameter id="_DQUyQE9KEeqhe5Q9EaMNPQ" name="StringHandling"/>
+    <routinesParameter id="_DRGOUE9KEeqhe5Q9EaMNPQ" name="TalendDataGenerator"/>
+    <routinesParameter id="_DQqJcE9KEeqhe5Q9EaMNPQ" name="Mathematical"/>
+    <routinesParameter id="_DQ1voE9KEeqhe5Q9EaMNPQ" name="TalendDate"/>
+  </parameters>
+  <node componentName="tSQLiteConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-128" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tDBConnection_1" show="false"/>
+    <elementParameter field="FILE" name="DBNAME" value="context.SQLLite"/>
+    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="true"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value="context.SQLLite_Table"/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tCreateTable" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tCreateTable_1" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DBTYPE" value="SQLITE"/>
+    <elementParameter field="CLOSED_LIST" name="TABLEACTION" value="CREATE_IF_NOT_EXIST"/>
+    <elementParameter field="CHECK" name="CASESENSITIVE" value="false" show="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="LOCAL_SERVICE_NAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="JDBC_URL" value="&quot;jdbc:oracle:oci:/@db10g_test&quot;" show="false"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;" show="false"/>
+    <elementParameter field="PASSWORD" name="PASS" value="enc:system.encryption.key.v1:qtyeiFKXxc23CVxh+9gbB2UnGkypkF97+EH5695I" show="false"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_ACCESS" value="" show="false"/>
+    <elementParameter field="FILE" name="DBFILE_ACCESS" value="&quot;C:/Users/Andrea/Documents/Talend/TOS_DI-Win32-20190620_1446-V7.2.1/workspace/in.mdb&quot;" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_AS400_VERSION" value="jt400-9.8.jar" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_AS400" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_DB2" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_FIREBIRD" value="" show="false"/>
+    <elementParameter field="FILE" name="DBFILE_FIREBIRD" value="&quot;C:/Users/Andrea/Documents/Talend/TOS_DI-Win32-20190620_1446-V7.2.1/workspace/in.FDB&quot;" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="RUNNING_MODE" value="HSQLDB_SERVER" show="false"/>
+    <elementParameter field="CHECK" name="TLS" value="false" show="false"/>
+    <elementParameter field="DIRECTORY" name="DBPATH_HSQL" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME_HSQL" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="DATABASE_ALIAS" value="&quot;&quot;" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_INFORMIX" value="" show="false"/>
+    <elementParameter field="TEXT" name="DBSERVER" value="&quot;&quot;" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_INGRES" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_INTERBASE" value="" show="false"/>
+    <elementParameter field="TEXT" name="DBFILE_INTERBASE" value="&quot;C:/Users/Andrea/Documents/Talend/TOS_DI-Win32-20190620_1446-V7.2.1/workspace/in.gdb&quot;" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="FRAMEWORK_TYPE" value="EMBEDED" show="false"/>
+    <elementParameter field="CHECK" name="CONNECTION_FLAG" value="false" show="false"/>
+    <elementParameter field="TEXT" name="DBNAME_JAVADB" value="&quot;&quot;" show="false"/>
+    <elementParameter field="DIRECTORY" name="DBROOTPATH" value="&quot;&quot;" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_MSSQL" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="MSSQL_DRIVER" value="JTDS" show="false"/>
+    <elementParameter field="CHECK" name="TEMPTABLE" value="false" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_MYSQL" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_MYSQL_VERSION" value="MYSQL_8" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_NETEZZA" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_ORACLE" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="CONNECTION_TYPE" value="ORACLE_SID" show="false"/>
+    <elementParameter field="TEXT" name="RAC_URL" value="&quot;&quot;" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_18" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_POSTGRE" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_POSTGRE_VERSION" value="V9_X" show="false"/>
+    <elementParameter field="CHECK" name="UNLOGGED" value="false" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_POSTGREPLUS" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_SQLITE" value="tDBConnection_1"/>
+    <elementParameter field="FILE" name="DBFILE_SQLITE" value="&quot;C:/Users/Andrea/Documents/Talend/TOS_DI-Win32-20190620_1446-V7.2.1/workspace/talend.db&quot;" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_SYBASE" value="" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_SYBASE_VERSION" value="SYBSEIQ_16" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_TERADATA" value="" show="false"/>
+    <elementParameter field="TEXT" name="ODBCNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_GREENPLUM" value="" show="false"/>
+    <elementParameter field="CHECK" name="VERTICA_USE_CASCADE" value="true" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERTICA_VERSION" value="VERTICA_9_0" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_VERTICA" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_EXASOL" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_REDSHIFT" value="" show="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION_SNOWFLAKE" value="" show="false"/>
+    <elementParameter field="TEXT" name="ACCOUNT" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="ROLE" value="&quot;&quot;" show="false"/>
+    <elementParameter field="TEXT" name="TABLE" value="&quot;EchoMail&quot;"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_dbwHgGncEeqwjKc3lPW3zQ - EchoMail" show="false"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="sqlite_id" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="CREATE_TABLE_TYPE" value="SET" show="false"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;" show="false"/>
+    <elementParameter field="LABEL" name="NOTE" value="*Note: Example for Additional JDBC Parameters: &quot;parameterName1=value1&amp;&amp;parameterName2=value2&quot;" show="false"/>
+    <elementParameter field="CHECK" name="ENFORCE_DELIMITED_IDENTIFIERS" value="false" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="VERTICA_CREATE_PROJECTION" value="true" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tCreateTable_1">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileList" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="352">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileList_1" show="false"/>
+    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.TempDir"/>
+    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
+    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
+    <elementParameter field="CHECK" name="ERROR" value="false"/>
+    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="true"/>
+    <elementParameter field="TABLE" name="FILES">
+      <elementValue elementRef="FILEMASK" value="&quot;*&quot;"/>
+      <elementValue elementRef="FILEMASK" value="&quot;*.*&quot;"/>
+    </elementParameter>
+    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="true"/>
+    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
+    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
+    <elementParameter field="CHECK" name="IFEXCLUDE" value="false"/>
+    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="&quot;*.txt&quot;" show="false"/>
+    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tFileDelete" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="352">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileDelete_1" show="false"/>
+    <elementParameter field="FILE" name="FILENAME" value="((String)globalMap.get(&quot;tFileList_1_CURRENT_FILEPATH&quot;))" show="false"/>
+    <elementParameter field="DIRECTORY" name="DIRECTORY" value="&quot;C:/Users/Andrea/Documents/Talend/TOS_DI-Win32-20190620_1446-V7.2.1/workspace/delete_folder&quot;" show="false"/>
+    <elementParameter field="TEXT" name="PATH" value="((String)globalMap.get(&quot;tFileList_1_CURRENT_FILEPATH&quot;))"/>
+    <elementParameter field="CHECK" name="FAILON" value="false"/>
+    <elementParameter field="CHECK" name="FOLDER" value="false" show="false"/>
+    <elementParameter field="CHECK" name="FOLDER_FILE" value="true"/>
+    <elementParameter field="LABEL" name="NOTE" value="*Note &quot;CURRENT_STATUS&quot; including:&#xA;&quot;File (or path) deleted.&quot;&#xA;&quot;No file (or path) deleted.&quot;&#xA;&quot;File (or path) does not exist or is invalid.&quot;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileDelete_1"/>
+  </node>
+  <node componentName="tPOP" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPOP_1" show="false"/>
+    <elementParameter field="TEXT" name="HOST" value="context.ImapHost"/>
+    <elementParameter field="TEXT" name="PORT" value="context.ImapPort"/>
+    <elementParameter field="TEXT" name="USERNAME" value="context.ImapUser"/>
+    <elementParameter field="PASSWORD" name="PASSWORD" value="enc:system.encryption.key.v1:7NsMd5/T7ofVq8WfKZ2KXSEZ9lPBucIFUjDqKZ17DNMfOI5sPjR3x7EHyY7FH5Me"/>
+    <elementParameter field="DIRECTORY" name="OUTPUT_DIRECTORY" value="context.TempDir"/>
+    <elementParameter field="TEXT" name="FILENAME_PATTERN" value="TalendDate.getDate(&quot;yyyyMMdd-hhmmss&quot;) + &quot;_&quot; + (counter_tPOP_1 + 1) + &quot;.mail&quot;"/>
+    <elementParameter field="CHECK" name="ALL_EMAILS" value="true"/>
+    <elementParameter field="CHECK" name="NEWER_EMAILS" value="true" show="false"/>
+    <elementParameter field="TEXT" name="MAX_EMAILS" value="10" show="false"/>
+    <elementParameter field="CHECK" name="DELETE_FROM_SERVER" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="PROTOCOL" value="imap"/>
+    <elementParameter field="CHECK" name="SPECIFY_MAIL_FOLDER" value="false"/>
+    <elementParameter field="TEXT" name="MAIL_FOLDER" value="&quot;INBOX&quot;" show="false"/>
+    <elementParameter field="CHECK" name="USE_SSL" value="true"/>
+    <elementParameter field="TABLE" name="ADVANCED_FILTER"/>
+    <elementParameter field="CLOSED_LIST" name="FILTER_RELATION" value="&amp;&amp;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tFileInputMail" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputMail_1" show="false"/>
+    <elementParameter field="FILE" name="FILENAME" value="((String)globalMap.get(&quot;tPOP_1_CURRENT_FILEPATH&quot;))"/>
+    <elementParameter field="CLOSED_LIST" name="MAIL_TYPE" value="MIME"/>
+    <elementParameter field="DIRECTORY" name="ATTACHMENT_PATH" value="context.TempDir"/>
+    <elementParameter field="TABLE" name="MAIL_PARTS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="MAIL_PART" value="&quot;From&quot;"/>
+      <elementValue elementRef="MULTI_VALUE" value="false"/>
+      <elementValue elementRef="PART_SEPARATOR" value="&quot;&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="MAIL_PART" value="&quot;Date&quot;"/>
+      <elementValue elementRef="MULTI_VALUE" value="false"/>
+      <elementValue elementRef="PART_SEPARATOR" value="&quot;&quot;"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailSubject"/>
+      <elementValue elementRef="MAIL_PART" value="&quot;Subject&quot;"/>
+      <elementValue elementRef="MULTI_VALUE" value="false"/>
+      <elementValue elementRef="PART_SEPARATOR" value="&quot;&quot;"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="MSG_MAIL_PARTS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="MAIL_PART" value="From"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="MAIL_PART" value="MessageDate"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailSubject"/>
+      <elementValue elementRef="MAIL_PART" value="Subject"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileInputMail_1">
+      <column comment="" key="false" length="-1" name="MailFrom" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="MailDate" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="MailSubject" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_1" show="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="DUMMY" value="true" show="false"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" value="true" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" value="false" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="true"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailSubject"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tLogRow_1">
+      <column comment="" key="false" length="-1" name="MailFrom" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="MailDate" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="MailSubject" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1" show="false"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_cnvQ4EmAEeqLAqbLGi8msQ-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true" show="false"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false" show="false"/>
+    <elementParameter field="TEXT" name="LEVENSHTEIN" value="0" show="false"/>
+    <elementParameter field="TEXT" name="JACCARD" value="0" show="false"/>
+    <elementParameter field="CHECK" name="ENABLE_AUTO_CONVERT_TYPE" value="false" show="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="outSQL" name="outSQL">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="-1" sourceType="" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="TalendMapper:MapperData">
+      <uiProperties/>
+      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <outputTables sizeState="INTERMEDIATE" name="outSQL">
+        <mapperTableEntries name="MailFrom" expression="row2.MailFrom " type="id_String"/>
+        <mapperTableEntries name="MailDate" expression="//Sat, 1 Feb 2020 17:11:10 +0100 &#xD;&#xA;TalendDate.formatDateLocale(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.parseDateLocale(&quot;E, d MMM yyyy HH:mm:ss Z&quot;,row2.MailDate,&quot;EN&quot;),&quot;EN&quot;) " type="id_String" nullable="true"/>
+        <mapperTableEntries name="MailNo" expression="Relational.ISNULL(row4.MailNo) ? 1 : row4.MailNo+1 " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="MailDateLastTime" expression="row4.MailDateLastTime " type="id_String" nullable="true"/>
+        <mapperTableEntries name="MailDateCompare" expression=" row4.MailDateCompare " type="id_String" nullable="true"/>
+        <mapperTableEntries name="Mailtobeskipped" expression="row4.Mailtobeskipped " type="id_Boolean" nullable="true"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="MailFrom" type="id_String" nullable="true"/>
+        <mapperTableEntries name="MailDate" type="id_String" nullable="true"/>
+        <mapperTableEntries name="MailSubject" type="id_String" nullable="true"/>
+      </inputTables>
+      <inputTables sizeState="INTERMEDIATE" name="row4" matchingMode="UNIQUE_MATCH" lookupMode="RELOAD">
+        <mapperTableEntries name="MailFrom" expression="row2.MailFrom " type="id_String" operator="="/>
+        <mapperTableEntries name="MailDate" type="id_String" nullable="true"/>
+        <mapperTableEntries name="MailNo" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="MailDateLastTime" type="id_String" nullable="true"/>
+        <mapperTableEntries name="MailDateCompare" type="id_String" nullable="true"/>
+        <mapperTableEntries name="Mailtobeskipped" type="id_Boolean" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tSQLiteInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tDBInput_1" show="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tDBConnection_1"/>
+    <elementParameter field="FILE" name="DBNAME" value="&quot;C:/Users/Andrea/Documents/EchoMail.sqlite&quot;" show="false"/>
+    <elementParameter field="TEXT" name="TYPE" value="SQLite" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_dbwHgGncEeqwjKc3lPW3zQ - EchoMail" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;EchoMail&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select MailFrom,MailDate,MailNo,MailDateLastTime,MailDateCompare,Mailtobeskipped from &quot; + context.SQLLite_Table"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="true"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="TRIM" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="TRIM" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailNo"/>
+      <elementValue elementRef="TRIM" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateLastTime"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateCompare"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tDBInput_1">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="544" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_dbwHgGncEeqwjKc3lPW3zQ - EchoMail" show="false"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="//Code erstellt anhand des Eingabe- und Ausgabeschemas&#xA;output_row.MailFrom = input_row.MailFrom;&#xA;output_row.MailDate = input_row.MailDate;&#xA;output_row.MailNo = input_row.MailNo;&#xA;output_row.MailDateLastTime = input_row.MailDateLastTime;&#xA;//System.out.println(&quot;output_row.MailDate=&quot;+output_row.MailDate);&#xA;//System.out.println(&quot;output_row.MailDateLastTime=&quot;+output_row.MailDateLastTime);&#xA;if (output_row.MailDateLastTime  == null){ &#xA;&#x9;output_row.MailDateLastTime = TalendDate.addDate(TalendDate.formatDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getCurrentDate()), &quot;yyyy-MM-dd HH:mm:ss&quot;, -context.Purge_time_Minutes*50, &quot;mm&quot;); // this is the first time&#xA;}&#xA;output_row.MailDateCompare=output_row.MailDateLastTime;&#xA;//System.out.println(&quot;output_row.MailDateCompare1=&quot;+output_row.MailDateCompare);&#xA;if (TalendDate.compareDate(TalendDate.parseDateLocale(&quot;yyyy-MM-dd HH:mm:ss&quot;,output_row.MailDateCompare,&quot;EN&quot;),TalendDate.parseDateLocale(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.addDate(TalendDate.formatDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getCurrentDate()), &quot;yyyy-MM-dd HH:mm:ss&quot;, -context.Purge_time_Minutes, &quot;mm&quot;),&quot;EN&quot;)) > 0) {&#xA;// Last Time was in Purge-Time-Range&#xA;&#x9;output_row.MailDateCompare=TalendDate.addDate(TalendDate.formatDate(&quot;yyyy-MM-dd HH:mm:ss&quot;,TalendDate.getCurrentDate()), &quot;yyyy-MM-dd HH:mm:ss&quot;, -context.Purge_time_Minutes*50, &quot;mm&quot;); // Skip this row&#xA;&#x9;System.out.println(&quot;Message is tooo new -> will be skipped!&quot;);&#xA;&#x9;output_row.Mailtobeskipped=true;&#xA;&#x9;}&#xA;else &#xA;{&#xA;&#x9;output_row.MailDateLastTime = input_row.MailDate; // This mail will be answered. Update it with new Date, and remmber in DB&#xA;&#x9;output_row.Mailtobeskipped=false;&#xA;}&#xA;//System.out.println(&quot;output_row.MailDateCompare2=&quot;+output_row.MailDateCompare);&#xA;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tJavaRow_1">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_3" show="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="DUMMY" value="true" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_dbwHgGncEeqwjKc3lPW3zQ - EchoMail" show="false"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" value="true" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" value="false" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="true"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailNo"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateLastTime"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateCompare"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tLogRow_3">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tSQLiteOutput" componentVersion="0.102" offsetLabelX="50" offsetLabelY="-17" posX="800" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tDBOutput_1" show="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tDBConnection_1"/>
+    <elementParameter field="FILE" name="DBNAME" value="&quot;C:/Users/Andrea/Documents/EchoMail.sqlite&quot;" show="false"/>
+    <elementParameter field="TEXT" name="TYPE" value="SQLite" show="false"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;EchoMail&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CREATE_IF_NOT_EXISTS"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:REPOSITORY_SCHEMA_TYPE" value="_dbwHgGncEeqwjKc3lPW3zQ - EchoMail" show="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="sqlite_id" show="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000" show="false"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailNo"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateLastTime"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateCompare"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH" value="true" show="false"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tDBOutput_1">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" label="EchoMail" name="REJECT">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="896" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_2" show="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="DUMMY" value="true" show="false"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" value="true" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" value="false" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="true"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailNo"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateLastTime"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateCompare"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tLogRow_2">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFilterRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFilterRow_1" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="LOGICAL_OP" value="&amp;&amp;"/>
+    <elementParameter field="TABLE" name="CONDITIONS"/>
+    <elementParameter field="CHECK" name="USE_ADVANCED" value="true"/>
+    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.Mailtobeskipped == false&#xA;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tFilterRow_1">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="FILTER" label="EchoMail" name="FILTER">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" label="EchoMail" name="REJECT">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_4" show="false"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" value="true" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" value="false" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="true"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailNo"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateLastTime"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateCompare"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="errorMessage"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tLogRow_4">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_5" show="false"/>
+    <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
+    <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
+    <elementParameter field="RADIO" name="VERTICAL" value="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE" value="true" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_LABEL" value="false" show="false"/>
+    <elementParameter field="RADIO" name="PRINT_UNIQUE_LABEL" value="false" show="false"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;|&quot;"/>
+    <elementParameter field="CHECK" name="PRINT_HEADER" value="true"/>
+    <elementParameter field="CHECK" name="PRINT_UNIQUE_NAME" value="false"/>
+    <elementParameter field="CHECK" name="PRINT_COLNAMES" value="false"/>
+    <elementParameter field="CHECK" name="USE_FIXED_LENGTH" value="false"/>
+    <elementParameter field="TABLE" name="LENGTHS" show="false">
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailFrom"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDate"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailNo"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateLastTime"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="MailDateCompare"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="LENGTH" value="10"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_CONTENT_WITH_LOG4J" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tLogRow_5">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tSendMail" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1216" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tSendMail_1" show="false"/>
+    <elementParameter field="TEXT" name="TO" value="row7.MailFrom"/>
+    <elementParameter field="TEXT" name="FROM" value="context.SmtpUser"/>
+    <elementParameter field="CHECK" name="NEED_PERSONAL_NAME" value="false"/>
+    <elementParameter field="TEXT" name="PERSONAL_NAME" value="&quot;Echo Deamon at Slainte.at&quot;" show="false"/>
+    <elementParameter field="TEXT" name="CC" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="BCC" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SUBJECT" value="row1.MailSubject"/>
+    <elementParameter field="MEMO_MESSAGE" name="MESSAGE" value="&quot;This is the automated Echo Daemon &quot;+context.SmtpUser +&quot; on &quot;+context.SMTPHost+&quot;.&#xA;To avoid spam, only one Mail within &quot;+context.Purge_time_Minutes+&quot; Minutes is answered. Every other mail is just deleted.&#xA;Attached you will find your mail with all your attributes.&#xA;&#xA;Enjoy and have FUN&quot;"/>
+    <elementParameter field="CHECK" name="CHECK_ATTACHMENT" value="true"/>
+    <elementParameter field="TABLE" name="ATTACHMENTS">
+      <elementValue elementRef="FILE" value="((String)globalMap.get(&quot;tPOP_1_CURRENT_FILEPATH&quot;))"/>
+      <elementValue elementRef="CONTENT_TRANSFER_ENCODING" value="DEFAULT"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="HEADERS"/>
+    <elementParameter field="TEXT" name="SMTP_HOST" value="context.SMTPHost"/>
+    <elementParameter field="TEXT" name="SMTP_PORT" value="context.SMTPPort"/>
+    <elementParameter field="CHECK" name="SSL" value="false"/>
+    <elementParameter field="CHECK" name="STARTTLS" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="IMPORTANCE" value="Normal"/>
+    <elementParameter field="CHECK" name="NEED_AUTH" value="true"/>
+    <elementParameter field="TEXT" name="AUTH_USERNAME" value="context.SmtpUser"/>
+    <elementParameter field="PASSWORD" name="AUTH_PASSWORD" value="enc:system.encryption.key.v1:7Vo6CaEL0Ci8ITt11zoKgRO9D9y1rDk3Eyr565YsO0v/t9i+SDnWOF73s+nLWqAH"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="TEXT_SUBTYPE" value="plain"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;UTF-8&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="UTF-8"/>
+    <elementParameter field="CHECK" name="SET_LOCALHOST" value="false"/>
+    <elementParameter field="TEXT" name="LOCALHOST" value="&quot;localhost&quot;" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" label="EchoMail" name="tSendMail_1">
+      <column comment="Mailadress" key="true" length="-1" name="MailFrom" nullable="false" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
+      <column comment="Date and Time of last Email" key="false" length="-1" name="MailDate" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="How many Mail did we already get from this user" defaultValue="0" key="false" length="-1" name="MailNo" nullable="true" pattern="" precision="-1" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+      <column comment="When was last mail sent?" key="false" length="-1" name="MailDateLastTime" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Which date did i take for comparison?" key="false" length="-1" name="MailDateCompare" nullable="true" pattern="&quot;YYYY-MM-DD HH:MM:SS&quot;" precision="-1" sourceType="TEXT" type="id_String" usefulColumn="true"/>
+      <column comment="Last Message was skipped=true" key="false" length="-1" name="Mailtobeskipped" nullable="true" pattern="" precision="0" sourceType="BIT" type="id_Boolean" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileTouch" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-256" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileTouch_1" show="false"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.TempDir+&quot;/&quot;+context.SQLLite_Table"/>
+    <elementParameter field="CHECK" name="CREATEDIR" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileTouch_1"/>
+  </node>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tDBConnection_1" offsetLabelX="0" offsetLabelY="0" source="tDBConnection_1" target="tCreateTable_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1" show="false"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tCreateTable_1" offsetLabelX="0" offsetLabelY="0" source="tCreateTable_1" target="tPOP_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2" show="false"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tFileList_1" offsetLabelX="0" offsetLabelY="0" source="tFileList_1" target="tFileDelete_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2" show="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2" show="false"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tPOP_1" offsetLabelX="0" offsetLabelY="0" source="tPOP_1" target="tFileInputMail_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2" show="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1" show="false"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPOP_1" offsetLabelX="0" offsetLabelY="0" source="tPOP_1" target="tFileList_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputMail_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputMail_1" target="tLogRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tLogRow_1" offsetLabelX="0" offsetLabelY="0" source="tLogRow_1" target="tMap_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="outSQL" lineStyle="0" metaname="outSQL" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tJavaRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="Mailtobeskipped"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="outSQL" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row4" lineStyle="8" metaname="tDBInput_1" offsetLabelX="0" offsetLabelY="0" source="tDBInput_1" target="tMap_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row10" lineStyle="0" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" source="tJavaRow_1" target="tLogRow_3">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row10" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tLogRow_3" offsetLabelX="0" offsetLabelY="0" source="tLogRow_3" target="tDBOutput_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tDBOutput_1" offsetLabelX="15" offsetLabelY="-2" source="tDBOutput_1" target="tLogRow_2">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row6" lineStyle="0" metaname="tLogRow_2" offsetLabelX="0" offsetLabelY="0" source="tLogRow_2" target="tFilterRow_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row6" show="false"/>
+  </connection>
+  <connection connectorName="FILTER" label="row7" lineStyle="0" metaname="FILTER" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tFilterRow_1" target="tLogRow_5">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7" show="false"/>
+  </connection>
+  <connection connectorName="REJECT" label="row8" lineStyle="0" metaname="REJECT" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tFilterRow_1" target="tLogRow_4">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row8" show="false"/>
+  </connection>
+  <connection connectorName="FLOW" label="row9" lineStyle="0" metaname="tLogRow_5" offsetLabelX="0" offsetLabelY="0" source="tLogRow_5" target="tSendMail_1">
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row9" show="false"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tFileTouch_1" offsetLabelX="0" offsetLabelY="0" source="tFileTouch_1" target="tDBConnection_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4" show="false"/>
+  </connection>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tDBConnection_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tCreateTable_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileList_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPOP_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileTouch_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+</talendfile:ProcessType>
