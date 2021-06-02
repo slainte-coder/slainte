@@ -1,24 +1,48 @@
-# slainte
+## Slainte
+
+Slainte ist ein gälischer Trinkspruch und bedeutet "Gesundheit", "zum Wohl".
+Slainte auf https://www.slainte.at ist ein Zusammenschluß begeisterter Informatiker.
+Auf der Seite wird alles mögliche beschrieben und umgesetzt.
+
+Hier auf Github findet man Sourcen und Subprojekte die dazu dienen Slainte zu betreiben / monitoren / sichern usw.
 
 
+## Vorraussetzungen damit dieses Projekt laufen kann.
 
-## Project title and description
+Ubuntu, bash, joomla, wordpress, mariadb, postgres, mailcow
+
+## Installationsanleitungen und erste Schritte
+
+Siehe ---
+
+## Testanleitungen um die Funktionstüchtigkeit zu überprüfen
+
+---
+
+## Überblick über die Abhängigkeiten
+
+--
+
+## Wie kann ich am Projekt teilnehmen.
+
+Code of Conduct
+
+## Hauptautoren und Betreiber des Projektes sind
+
+Peter Brunner
+Jakob Strutz
+Georg Mayr
+Michael Lackner
+Dieter Wulz
+Alfred Sabitzer https://github.com/Alfred-Sabitzer/Alfred-Sabitzer
+
+## Lizenz ist GPG
+
+https://github.com/slainte-coder/slainte/blob/main/LICENSE
+
+Die Lizenz ist GPG. Damit gibt sie allen Nutzern weitestgehende Freiheiten.
 
 
-## Prerequisites for getting the project running on your local machine
+## Was ich sonst noch sagen wollte
 
-## Instructions on installing the project (and any dependencies)
-
-## Instructions on running tests to make sure that you haven’t broken anything
-
-## Instructions on deploying the project
-
-## An overview of dependencies
-
-## A link to the guide on how to contribute to the project, including a code of
-
-## The main authors or maintainers of the project
-
-## A link to the license
-
-## Any additional acknowledgements
+Diese Projekt ist nur zum Spaß. Jede Art Code und Anleitung kann mit Fehlern behaftet sein. Von der Benutzung wird ausdrcklich abgeraten.
