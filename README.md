@@ -25,7 +25,9 @@ Siehe ---
 
 ## Wie kann ich am Projekt teilnehmen.
 
-Code of Conduct
+#[id]: url "Verhaltenskodex"
+#[id]: url "Teilnahme"
+
 
 ## Hauptautoren und Betreiber des Projektes sind
 
