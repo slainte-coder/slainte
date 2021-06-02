@@ -25,8 +25,8 @@ Siehe ---
 
 ## Wie kann ich am Projekt teilnehmen.
 
-#[id]: url "Verhaltenskodex"
-#[id]: url "Teilnahme"
+#[1]: https://github.com/slainte-coder/slainte/blob/main/Code-of-Conduct.md "Verhaltenskodex"
+#[2]: https://github.com/slainte-coder/slainte/blob/main/Teilnahme.md "Teilnahme"
 
 
 ## Hauptautoren und Betreiber des Projektes sind
