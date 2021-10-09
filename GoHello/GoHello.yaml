@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: GoHello
+  #namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: GoHello
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: GoHello
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+
+      containers:
+      - name: GoHello
+        image: docker.registry:32000/GoHello:20211009
+
+        # resource limits
+        resources:
+          requests:
+            memory: "24Mi"
+            cpu: "500m" # half vcpu
+          limits:
+            memory: "64Mi"
+            cpu: "1000m" # one vcpu
+
+        env:
+        # currently no env vars used for this container
+        - name: FOO
+          value: bar
+
+
+        # check for lifetime liveness, restarts if dead
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - /hello
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        # check for initial readyness
+        readinessProbe:
+          exec:
+            command:
+            - ls
+            - /hello
+          initialDelaySeconds: 3
+          periodSeconds: 3
+
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: GoHello-service
+  #namespace: default
+  labels:
+    app: GoHello
+spec:
+  ports:
+  # port=available to other containers
+  - port: 1234
+    name: hello
+    # targetPort=exposed from inside container
+    targetPort: 1234
+    protocol: TCP
+  selector:
+    app: GoHello
+---
